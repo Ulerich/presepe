@@ -1,6 +1,6 @@
 # Codice configurazione Arduino/Raspberry luci presepe
 
-Prese di corrente totali 11, Utilizzate 10
+Prese di corrente totali 13, Utilizzate 11
 
 - 1 Presa dirette - Capanna
 - 8 Prese gestite da Relè

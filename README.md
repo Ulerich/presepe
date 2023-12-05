@@ -1,6 +1,16 @@
 # Codice configurazione Arduino/Raspberry luci presepe
 
-Prese di corrente totali 13, Utilizzate 11
+Codice per la gestione di una scheda Relè collegata ad un presepe per simulare il ciclo notte giorno attraverso l'accensione e lo spegnimento temporizzato di luci e motori per la gestione dei lavori.
+
+## Materiale utilizzato
+
+Scheda "Yizhet 8 Canali Relay Modulo DC 5V" Relè con accoppiatore ottico per Arduino Raspberry Pi (acquistabile su Amazon a circa € 12).
+
+## File
+
+Presente il codice .ino per Arduino e codice py per Rasberry.
+
+## Prese di corrente totali 13, Utilizzate 11
 
 - 1 Presa dirette - Capanna
 - 8 Prese gestite da Relè
@@ -17,3 +27,7 @@ Prese di corrente totali 13, Utilizzate 11
 ## Oggetti non gestiti (corrente diretta)
 
 - Capanna
+
+# Arduino Pin utilizzati
+
+Dal Pin 4-11 gestione Relè

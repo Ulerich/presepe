@@ -1,13 +1,13 @@
 void setup() {
   // put your setup code here, to run once:
-  pinMode(11,OUTPUT); //Fabbro movimento
-  pinMode(7,OUTPUT); // Fuoco fabbro
-  pinMode(10,OUTPUT); // Falegname
-  pinMode(6,OUTPUT); // Luci falegname
-  pinMode(8,OUTPUT); // Panettiere
-  pinMode(4,OUTPUT); // Movimento arrotino
+  pinMode(11,OUTPUT); //Arrotino
+  pinMode(7,OUTPUT); // Fabbro
+  pinMode(10,OUTPUT); // Panettiere
+  pinMode(6,OUTPUT); // Luci paese
+  pinMode(8,OUTPUT); // Falegname
+  pinMode(4,OUTPUT); // Mulino
   pinMode(9,OUTPUT); // Luce montagna e mestieri
-  pinMode(5,OUTPUT); // Luci paese
+  pinMode(5,OUTPUT); // Luce falegname e fuoco fabbro
   // inizializzo tutti i pin per tenere il circuito aperto
   digitalWrite(11, HIGH);
   digitalWrite(10, HIGH);
@@ -20,11 +20,11 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  //Mulino sempre acceso  
   //LOW chiude il relè e quindi il circuito
   //HIGH lo tiene aperto
-  int panettiere = 8, arrotino = 4, fabbro = 11, fabbrof = 7, falegname = 10, falegnameluci = 6;
-  int lucim = 9, lucip = 5;
+  int panettiere = 10, arrotino = 11, fabbro = 7, fabbrofale_lale_l = 5, falegname = 8;
+  int lucim = 9, lucip = 6;
   unsigned long mattino = 120000;
   unsigned long pranzo = 30000;
   unsigned long pomeriggio = 120000;
@@ -37,11 +37,11 @@ void loop() {
   digitalWrite(lucim, LOW); //accensione luci montanga e mestieri
   digitalWrite(panettiere, LOW); //il paniettiere continua a lavorare dalla notte
   delay(1000);
-  digitalWrite(fabbrof, LOW); //accendo il fuoco del fabbro
-  digitalWrite(falegnameluci, LOW); //accensione luci falegname
+  digitalWrite(fabbrofale_l, LOW); //accendo il fuoco del fabbro
+  //accensione luci falegname
   delay(warmup*2); //attendo 5 secondi
   digitalWrite(fabbro, LOW); //il fabbro inizia a lavorare
-  digitalWrite(falegname, LOW); //il falegname inizia a lavorare
+  //il falegname inizia a lavorare
   digitalWrite(arrotino, LOW); //arrotino inizia a lavorare
   delay(mattino);
   digitalWrite(fabbro, HIGH); //pausa pranzo fabbro
@@ -57,9 +57,7 @@ void loop() {
   digitalWrite(falegname, HIGH);
   digitalWrite(fabbro, HIGH);
   delay(sera);
-  digitalWrite(falegnameluci, HIGH);
-  delay(1000);
-  digitalWrite(fabbrof, HIGH);
+  digitalWrite(fabbrofale_l, HIGH);
   delay(1000);
   digitalWrite(panettiere, LOW);
   delay(2000);

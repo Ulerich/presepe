@@ -1,42 +1,65 @@
 import RPi.GPIO as GPIO
 import time
 
-# Imposta la modalità di numerazione dei pin
+# Configurazione GPIO
+RELAY_PINS = [17, 27, 22, 23, 24, 25, 16, 26]  # GPIO dei relè
+
+panettiere = 1
+lavoro1 = 2
+falegname = 3
+vuoto = 4
+luci_paese = 5
+luci_grotta = 7
+fabbro = 0
 GPIO.setmode(GPIO.BCM)
+for pin in RELAY_PINS:
+    GPIO.setup(pin, GPIO.OUT)  # Configura ogni pin come OUTPUT
 
-# Definisci i pin GPIO collegati ai relè
-pin_relè = [29, 31, 32, 33, 35, 36, 37, 38]
-fabbro_luce = 29
-fabbro_mov = 31
-falegname_luce = 32
-falegname_mov = 33
-panettiere = 35
-arrotino = 36
-mulino = 37
-luci = 38
+def spegni_rele(index):
+    GPIO.output(RELAY_PINS[index], GPIO.HIGH)
 
-# Imposta i pin come output
-GPIO.setup(pin_relè, GPIO.OUT)
+def accendi_rele(index):
+    GPIO.output(RELAY_PINS[index], GPIO.LOW)
 
-def accendi_luci():
-    print("Accensione luci")
-    GPIO.output(pin_relè, GPIO.HIGH)
+def accendi_rele_unico(index):
+    """Spegne tutti i relè, quindi accende solo quello specificato."""
+    spegni_tutti()
+    GPIO.output(RELAY_PINS[index], GPIO.LOW)  # Accende il relè specificato
 
-def spegni_luci():
-    print("Spegnimento luci")
-    GPIO.output(pin_relè, GPIO.LOW)
+def spegni_tutti():
+    """Spegne tutti i relè."""
+    for pin in RELAY_PINS:
+        GPIO.output(pin, GPIO.HIGH)
 
 try:
+    spegni_tutti()
+    accendi_rele(7)
+    time.sleep(5)
     while True:
-        # Simulazione del ciclo giorno/notte (modifica secondo le tue esigenze)
-        accendi_luci()
-        time.sleep(10)  # Accendi le luci per 10 secondi
-        spegni_luci()
-        time.sleep(10)  # Spegni le luci per 10 secondi
-
+        accendi_rele(1)
+        time.sleep(10)
+        accendi_rele(5)
+        time.sleep(10)
+        accendi_rele(2)
+        accendi_rele(3)
+        accendi_rele(0)
+        time.sleep(20)
+        spegni_rele(2)
+        spegni_rele(3)
+        spegni_rele(0)
+        time.sleep(10)
+        spegni_rele(1)
+        accendi_rele(2)
+        accendi_rele(3)
+        accendi_rele(0)
+        time.sleep(20)
+        spegni_rele(2)
+        time.sleep(2)
+        spegni_rele(0)
+        spegni_rele(3)
+        time.sleep(5)
+        spegni_rele(5)
+        time.sleep(15)
 except KeyboardInterrupt:
-    pass
-
-finally:
-    # Ripristina i pin GPIO allo stato iniziale
+    print("Pulizia GPIO")
     GPIO.cleanup()

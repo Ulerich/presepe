@@ -1,0 +1,14 @@
+[Unit]
+Description=Script per il controllo dei relè del presepe
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/presepe.py
+WorkingDirectory=/home/pi
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
